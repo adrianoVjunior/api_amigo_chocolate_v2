@@ -1,0 +1,514 @@
+{
+	"info": {
+		"_postman_id": "396c025d-e501-4c4f-9e09-e85283ac22f9",
+		"name": "amigo-chocolate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pessoa",
+			"item": [
+				{
+					"name": "Index",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pessoa/?page=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pessoa",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOne",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/pessoa/gerjunior",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pessoa",
+								"gerjunior"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nome\": \"Abner\",\r\n        \"sobrenome\": \"Luis\",\r\n\t\t\"email\": \"uniaraxa.abner@pereira.com\",\r\n        \"dataNascimento\": \"1999-07-03\",\r\n\t\t\"apelido\": \"abener\",\r\n        \"senha\": \"admin@123\",\r\n        \"descricao\": \"UHUUU\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pessoa/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pessoa",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"5e591412ddf11028b0d12e20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pessoa/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pessoa",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/pessoa/poney",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pessoa",
+								"poney"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Friend",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/pessoa/add/d4rkuus/gerjunior",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pessoa",
+								"add",
+								"d4rkuus",
+								"gerjunior"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Friend",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/pessoa/remove/gerjunior/d4rkuus",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pessoa",
+								"remove",
+								"gerjunior",
+								"d4rkuus"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Grupo",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/grupo?page=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"grupo"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOne",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/grupo/5e565d462aa9175d5c78f401",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"grupo",
+								"5e565d462aa9175d5c78f401"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"admin\": {\n    \t\"apelido\": \"gerjunior\"\n    },\n    \"nome\": \"Corda bamba\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/grupo/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"grupo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"5e565d462aa9175d5c78f401\",\n    \"admin\": {\n        \"_id\": \"5e565a5916ae6d2c10bccd7d\",\n        \"nome\": \"Geraldo Júnior\",\n        \"sobrenome\": \"Silviano da Silva\",\n        \"email\": \"geraldojuni@hotmail.com\",\n        \"dataNascimento\": \"1999-09-24T00:00:00.000Z\",\n        \"apelido\": \"gerjunior\",\n        \"senha\": \"123@admin\",\n        \"descricao\": \"Quero doce!\",\n        \"__v\": 0\n    },\n    \"valorMinimo\": 10,\n    \"valorMaximo\": 50,\n    \"dataSorteio\": null,\n    \"pessoas\": [\n        {\n            \"amigoChocolate\": {\n                \"info\": {\n                    \"_id\": \"5e567118a37c502b44f5d2ae\",\n                    \"nome\": \"Rubinho\",\n                    \"sobrenome\": \"Barrichelo\",\n                    \"email\": \"contato@barrichelo.com\",\n                    \"dataNascimento\": \"1990-01-20T00:00:00.000Z\",\n                    \"apelido\": \"rubem\",\n                    \"senha\": \"senha123\",\n                    \"descricao\": \"UM CARRINHO\",\n                    \"__v\": 0\n                },\n                \"desejos\": [\"QUALQUER COISA QUE SEJA CARA\"]\n            },\n            \"desejos\": [\n                \"Chocolate!\",\n                \"MAIS CHOCOLATE!\"\n            ],\n            \"_id\": \"5e565d462aa9175d5c78f403\",\n            \"info\": {\n                \"_id\": \"5e565a5916ae6d2c10bccd7d\",\n                \"nome\": \"Geraldo Júnior\",\n                \"sobrenome\": \"Silviano da Silva\",\n                \"email\": \"geraldojuni@hotmail.com\",\n                \"dataNascimento\": \"1999-09-24T00:00:00.000Z\",\n                \"apelido\": \"gerjunior\",\n                \"senha\": \"123@admin\",\n                \"descricao\": \"Quero doce!\",\n                \"__v\": 0\n            }\n        }\n    ],\n    \"__v\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/grupo/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"grupo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/grupo/5e5eeaff2453c01d5c957270",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"grupo",
+								"5e5eeaff2453c01d5c957270"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/grupo/add/5e5eeb1b2453c01d5c957271/pereira",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"grupo",
+								"add",
+								"5e5eeb1b2453c01d5c957271",
+								"pereira"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Group Member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/grupo/remove/5e5948fdccec8139d48297f8/gerjunior",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"grupo",
+								"remove",
+								"5e5948fdccec8139d48297f8",
+								"gerjunior"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Draw",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/grupo/draw/5e5eeb1b2453c01d5c957271",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"grupo",
+								"draw",
+								"5e5eeb1b2453c01d5c957271"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "GerarToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "af72ba66-3b73-4ee8-9f0b-ebe21883e7d0",
+								"exec": [
+									"let response = JSON.parse(responseBody)\r",
+									"pm.collectionVariables.set(\"token\", response.token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"apelido\": \"gerjunior\",\n\t\"senha\": \"admin@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7ac32734-7b03-42f3-957f-03731bea257a",
+				"type": "text/javascript",
+				"exec": [
+					"var settings = {",
+					"  \"url\": pm.collectionVariables.get(\"url\") + \"/Token\",",
+					"  \"method\": \"POST\",",
+					"  \"timeout\": 0,",
+					"  \"header\": {",
+					"    \"Content-Type\": \"application/json\"",
+					"  },",
+					"  \"body\": {",
+					"    \"mode\": \"raw\",",
+					"    \"raw\": JSON.stringify(",
+					"      {",
+					"        \"apelido\": \"gerjunior\",",
+					"        \"senha\": \"admin@123\"",
+					"      })",
+					"  }",
+					"};",
+					"",
+					"pm.sendRequest(settings, (error, response) => {",
+					"  var Token = response.json().token",
+					"  pm.collectionVariables.set(\"token\", Token);",
+					"})"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "288fb53c-2d49-4b62-8ca1-c2315b22c82f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "ef555fae-feca-45d9-88c0-1de51469b0e5",
+			"key": "url",
+			"value": "http://localhost:3333",
+			"type": "string"
+		},
+		{
+			"id": "1f7e2deb-2eb0-4adc-b682-f95e28eb7766",
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTU5MzJhMTNiNDQzODY1MDgxZTAwOWQiLCJzZW5oYSI6ImFkbWluQDEyMyIsImlhdCI6MTU4NDEwOTEyNSwiZXhwIjoxNTg0MTA5MTI2fQ.AghhhF7puVChUPY-_7dHsygLsXk4YODXL5MOAHeDfO4",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
