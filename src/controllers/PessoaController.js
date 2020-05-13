@@ -4,7 +4,7 @@ const {
     validationError,
     addFriendError,
     alreadyFriend,
-    invalidNick,
+    invalidUsuario,
     nickNotFound,
     missingInformations } = require('../utils/error')
 
@@ -13,7 +13,7 @@ module.exports = {
 
         const { page = 1 } = request.query;
 
-        Pessoa.paginate(request.body, {page, limit : 10 }, (err, res) => {
+        Pessoa.paginate(request.body, { page, limit: 10 }, (err, res) => {
 
             if (err) {
                 return response.status(500).json({ ...generic, _message: err.message })
@@ -27,9 +27,9 @@ module.exports = {
     },
 
     getOne(request, response) {
-        let { Nick } = request.params
+        let { usuario } = request.params
 
-        Pessoa.findOne({ apelido: Nick }, (err, res) => {
+        Pessoa.findOne({ usuario: usuario }, (err, res) => {
             if (err || !res) {
                 return response.status(404).json({})
             }
@@ -40,22 +40,31 @@ module.exports = {
 
     create(request, response) {
 
-        Pessoa.create(request.body, (err, res) => {
-            if (err && err.name === "MongoError") {
-                return response.status(400).json({
-                    ...invalidNick,
-                    message: `Já existe um usuário com o apelido ${request.body.apelido}`,
-                })
-            }
-            else if (err && err.name === "ValidationError") {
-                return response.status(400).json({
-                    ...validationError,
-                    _message: err.message
-                })
-            }
 
-            return response.send(res)
-        })
+
+        const UsuarioRetorno = Pessoa.create(request.body)
+
+
+        return response.json(UsuarioRetorno)
+
+        // Pessoa.create(request.body, (err, res) => {
+        //     if (err && err.name === "MongoError") {
+        //         return response.status(400).json({
+        //             ...invalidUsuario,
+        //             message: `Já existe um usuário com o usuario ${request.body.usuario}`,
+        //         })
+        //     }
+        //     else if (err && err.name === "ValidationError") {
+        //         return response.status(400).json({
+        //             ...invalidUsuario,
+        //             _message: err.message
+        //         })
+        //     }
+
+        //     return response.send(response)
+        // })
+
+
     },
 
     edit(request, response) {
@@ -86,9 +95,9 @@ module.exports = {
     },
 
     delete(request, response) {
-        let { Nick } = request.params
+        let { Usuario } = request.params
 
-        Pessoa.findOneAndDelete({ apelido: Nick }, async (err, res) => {
+        Pessoa.findOneAndDelete({ usuario: Usuario }, async (err, res) => {
             if (err) {
                 return response.status(400).json({
                     ...missingInformations,
@@ -111,8 +120,8 @@ module.exports = {
 
         let { MyNick, FriendNick } = request.params
 
-        const Me = await Pessoa.findOne({ apelido: MyNick })
-        const Friend = await Pessoa.findOne({ apelido: FriendNick })
+        const Me = await Pessoa.findOne({ usuario: MyNick })
+        const Friend = await Pessoa.findOne({ usuario: FriendNick })
 
         if (!Friend || !Me) {
             return response.status(404).json({

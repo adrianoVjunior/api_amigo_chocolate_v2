@@ -6,7 +6,7 @@ const PessoaSchema = new mongoose.Schema({
     sobrenome: String,
     email: { type: String, required: true, index: true, unique: true },
     dataNascimento: Date,
-    apelido: { type: String, required: true, index: true, unique: true },
+    usuario: { type: String, required: true, index: true, unique: true },
     senha: { type: String, required: true },
     amigos: [{
         _id: String,

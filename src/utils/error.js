@@ -16,9 +16,9 @@ module.exports = {
         _message: "..."
     },
 
-    invalidNick: {
+    invalidUsuario: {
         success: false,
-        message: "O Nick informado já existe."
+        message: "O usuario informado já existe."
     },
 
     addFriendError: {
