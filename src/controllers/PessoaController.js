@@ -38,33 +38,16 @@ module.exports = {
         })
     },
 
-    create(request, response) {
-
-
-
-        const UsuarioRetorno = Pessoa.create(request.body)
-
-
-        return response.json(UsuarioRetorno)
-
-        // Pessoa.create(request.body, (err, res) => {
-        //     if (err && err.name === "MongoError") {
-        //         return response.status(400).json({
-        //             ...invalidUsuario,
-        //             message: `Já existe um usuário com o usuario ${request.body.usuario}`,
-        //         })
-        //     }
-        //     else if (err && err.name === "ValidationError") {
-        //         return response.status(400).json({
-        //             ...invalidUsuario,
-        //             _message: err.message
-        //         })
-        //     }
-
-        //     return response.send(response)
-        // })
-
-
+    async create(request, response) {
+        let { usuario } = request.body;
+        const UsuarioRetorno = await Pessoa.findOne({ usuario: usuario });
+        if (UsuarioRetorno === null) {
+            const createResponse = await Pessoa.create(request.body)
+            return response.send(createResponse);
+        }
+        else {
+            return response.status(400).json({ message: "Usuário já cadastrado" });
+        }
     },
 
     edit(request, response) {
