@@ -51,16 +51,16 @@ module.exports = {
 
         //Status do Grupo (A - Aguardando, S - Sorteado, F - Finalizado)
         let statusGrupo = 'A'
-        let apelido = admin.apelido
+        let usuario = admin.usuario
 
-        if (!admin || !admin.apelido) {
-            return response.status(400).json({ ...missingInformations, admin: { apelido: "apelido" } })
+        if (!admin || !admin.usuario) {
+            return response.status(400).json({ ...missingInformations, admin: { usuario: "usuario" } })
         }
 
-        admin = await Pessoa.findOne({ apelido: admin.apelido })
+        admin = await Pessoa.findOne({ usuario: admin.usuario })
 
         if (!admin) {
-            return response.status(404).json({ ...nickNotFound, apelido: apelido })
+            return response.status(404).json({ ...nickNotFound, usuario: usuario })
         }
 
         let grupo = { ...request.body, admin, statusGrupo, integrantes: admin }
@@ -69,7 +69,7 @@ module.exports = {
                 return response.status(400).json({ ...validationError, _message: err.message })
             }
 
-            await Pessoa.findOneAndUpdate({ apelido: apelido }, { "$push": { "grupos": res } })
+            await Pessoa.findOneAndUpdate({ usuario: usuario }, { "$push": { "grupos": res } })
 
             return response.send(res)
         })
