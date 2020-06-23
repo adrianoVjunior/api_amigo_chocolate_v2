@@ -12,7 +12,7 @@ const {
     notGroupMember,
     removeAdmin,
     alreadyDraw } = require('../utils/error')
-    
+
 const draw = require('../utils/draw')
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
 
         const { page = 1 } = request.query;
 
-        Grupo.paginate(request.body,{page, limit : 3 }, (err, res) => {
+        Grupo.paginate(request.body, { page, limit: 3 }, (err, res) => {
 
             if (!res || res.length === 0) {
                 return response.status(404).json(res)
@@ -32,6 +32,17 @@ module.exports = {
 
             return response.send(res)
         })
+    },
+
+
+
+    getByUser(request, response) {
+        let { usuario } = request.params
+
+        let teste = Grupo.find({ integrantes: { "$elemMatch": { "usuario": usuario } } })
+
+
+        console.log(teste)
     },
 
     getOne(request, response) {
@@ -113,15 +124,15 @@ module.exports = {
     },
 
     async addNewMember(request, response) {
-        let { _idGroup, Nick } = request.params
+        let { _idGroup, usuario } = request.params
 
-        const member = await Pessoa.findOne({ apelido: Nick })
+        const member = await Pessoa.findOne({ usuario: usuario })
 
         if (!member) {
-            return response.status(404).json({ ...nickNotFound, Nick: Nick })
+            return response.status(404).json({ ...nickNotFound, usuario: usuario })
         }
 
-        const isAlreadyMember = await Grupo.findOne({ _id: _idGroup, integrantes: { "$elemMatch": { "apelido": Nick } } })
+        const isAlreadyMember = await Grupo.findOne({ _id: _idGroup, integrantes: { "$elemMatch": { "usuario": usuario } } })
 
         if (!isAlreadyMember || isAlreadyMember.length === 0) {
             Grupo.findByIdAndUpdate(_idGroup, { "$push": { "integrantes": member } }, { new: true }, async (err, res) => {
@@ -134,43 +145,43 @@ module.exports = {
                     return response.status(404).json({ ...groupNotFound, _id: _idGroup })
                 }
 
-                await Pessoa.findOneAndUpdate({ apelido: Nick }, { "$push": { "grupos": res } })
+                await Pessoa.findOneAndUpdate({ usuario: usuario }, { "$push": { "grupos": res } })
 
                 return response.send(res)
             })
         }
         else {
-            return response.status(400).json({ ...alreadyGroupMember, _idGroup: _idGroup, nickMember: member.apelido })
+            return response.status(400).json({ ...alreadyGroupMember, _idGroup: _idGroup, usuario: member.usuario })
         }
     },
 
     async removeMember(request, response) {
-        let { _idGroup, Nick } = request.params
+        let { _idGroup, usuario } = request.params
 
-        const member = await Pessoa.findOne({ apelido: Nick })
+        const member = await Pessoa.findOne({ usuario: usuario })
 
         if (!member) {
-            return response.status(404).json({ ...nickNotFound, Nick: Nick })
+            return response.status(404).json({ ...nickNotFound, usuario: usuario })
         }
 
-        const Group = await Grupo.findOne({ _id: _idGroup, integrantes: { "$elemMatch": { "apelido": Nick } } })
+        const Group = await Grupo.findOne({ _id: _idGroup, integrantes: { "$elemMatch": { "usuario": usuario } } })
 
         if (!Group) {
-            return response.status(404).json({ ...notGroupMember, Nick: Nick })
+            return response.status(404).json({ ...notGroupMember, usuario: usuario })
         }
 
-        if (Group.admin.apelido === member.apelido) {
+        if (Group.admin.usuario === member.usuario) {
             return response.status(400).json({ ...removeAdmin })
         }
 
 
-        Grupo.findOneAndUpdate({ _id: _idGroup }, { "$pull": { integrantes: { apelido: Nick } } }, { new: true }, async (err, res) => {
+        Grupo.findOneAndUpdate({ _id: _idGroup }, { "$pull": { integrantes: { usuario: usuario } } }, { new: true }, async (err, res) => {
 
             if (err) {
                 return response.send(500).json({ ...generic, _message: err.message })
             }
 
-            await Pessoa.findOneAndUpdate({ apelido: Nick }, { "$pull": { "grupos": { "_id": _idGroup } } }, { new: true })
+            await Pessoa.findOneAndUpdate({ usuario: usuario }, { "$pull": { "grupos": { "_id": _idGroup } } }, { new: true })
 
             return response.send(res)
         })
@@ -202,10 +213,10 @@ module.exports = {
 
         //aggregate retorna sempre uma lista
         let grupo = Group[0]
-        
+
         //Status do Grupo (A - Aguardando, S - Sorteado, F - Finalizado)
         if (grupo.statusGrupo !== "A") {
-            return response.status(400).json({...alreadyDraw})
+            return response.status(400).json({ ...alreadyDraw })
         }
 
         const listaSorteio = draw(grupo.integrantes)
