@@ -38,11 +38,21 @@ module.exports = {
 
     getByUser(request, response) {
         let { usuario } = request.params
+        Grupo.find({ 'integrantes.usuario': usuario }, async (err, res) => {
+            if (err) {
+                return response.status(400).json({
+                    ...missingInformations,
+                    usuario: "usuario",
+                    _message: err.message
+                })
+            }
+            if (!res) {
+                return response.status(404).json({})
+            }
+            console.log(res)
 
-        let teste = Grupo.find({ integrantes: { "$elemMatch": { "usuario": usuario } } })
-
-
-        console.log(teste)
+            return response.json(res)
+        })
     },
 
     getOne(request, response) {
